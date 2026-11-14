@@ -20,3 +20,6 @@ const handleTermination = (signal: string) => {
 
 process.on('SIGTERM', () => handleTermination('SIGTERM'));
 process.on('SIGINT', () => handleTermination('SIGINT'));
+
+export default app;
+export { app, server };

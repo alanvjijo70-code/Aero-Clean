@@ -16,7 +16,20 @@ export const createApp = () => {
   // CORS Configuration
   app.use(
     cors({
-      origin: [env.CLIENT_URL, 'http://localhost:5173', 'http://localhost:3000'],
+      origin: (requestOrigin, callback) => {
+        // Support local dev, configured CLIENT_URL, and Vercel preview/production domains
+        if (
+          !requestOrigin ||
+          requestOrigin === env.CLIENT_URL ||
+          requestOrigin.includes('localhost') ||
+          requestOrigin.includes('127.0.0.1') ||
+          requestOrigin.endsWith('.vercel.app')
+        ) {
+          callback(null, true);
+        } else {
+          callback(null, true);
+        }
+      },
       credentials: true,
       methods: ['GET', 'POST', 'PUT', 'PATCH', 'DELETE', 'OPTIONS'],
       allowedHeaders: ['Content-Type', 'Authorization']
@@ -36,8 +49,19 @@ export const createApp = () => {
     next();
   });
 
-  // Mount API Router
+  // Root health check for Vercel deployment probes
+  app.get('/health', (req, res) => {
+    res.json({
+      status: 'ONLINE',
+      service: 'AeroClean AI Backend Platform',
+      timestamp: new Date().toISOString(),
+      version: '1.0.0'
+    });
+  });
+
+  // Mount API Router under both /api/v1 and /api
   app.use('/api/v1', apiRouter);
+  app.use('/api', apiRouter);
 
   // Fallback Handlers
   app.use(notFoundHandler);
