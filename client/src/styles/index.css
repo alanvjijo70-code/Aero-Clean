@@ -1,0 +1,81 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --background: #050B16;
+    --background-secondary: #091426;
+    --surface: #0D1B2E;
+    --surface-glass: rgba(18, 37, 61, 0.65);
+    --primary: #00D9FF;
+    --secondary: #1677FF;
+    --accent: #65F4FF;
+    --text-primary: #F4F8FF;
+    --text-secondary: #9BAEC4;
+    --border: rgba(119, 190, 255, 0.16);
+    --success: #27E5A2;
+    --warning: #FFB547;
+    --danger: #FF647C;
+  }
+
+  body {
+    background-color: var(--background);
+    color: var(--text-primary);
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  }
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: 'Outfit', sans-serif;
+  }
+}
+
+/* Custom Aerospace Grid Background */
+.bg-grid-pattern {
+  background-size: 40px 40px;
+  background-image: 
+    linear-gradient(to right, rgba(0, 217, 255, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(0, 217, 255, 0.05) 1px, transparent 1px);
+}
+
+.bg-radial-glow {
+  background: radial-gradient(circle at 50% 30%, rgba(0, 217, 255, 0.12) 0%, transparent 70%);
+}
+
+/* Glassmorphism Classes */
+.glass-panel {
+  background: rgba(13, 27, 46, 0.7);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(119, 190, 255, 0.16);
+}
+
+.glass-panel-hover {
+  transition: all 0.3s ease;
+}
+
+.glass-panel-hover:hover {
+  background: rgba(18, 37, 61, 0.85);
+  border-color: rgba(0, 217, 255, 0.4);
+  box-shadow: 0 0 25px rgba(0, 217, 255, 0.15);
+}
+
+/* Custom Scrollbars */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #050B16;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #0D1B2E;
+  border-radius: 4px;
+  border: 1px solid rgba(119, 190, 255, 0.2);
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #1677FF;
+}
