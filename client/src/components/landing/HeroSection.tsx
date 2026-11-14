@@ -73,7 +73,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ activeWorkflowStage = 
                 onClick={scrollToDrone}
                 icon={<Sparkles className="w-4 h-4 text-background" />}
               >
-                Explore 3D Drone Model
+                Explore Hardware Schematic
               </GradientButton>
 
               <button
