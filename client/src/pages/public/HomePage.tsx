@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { HeroSection } from '../../components/landing/HeroSection.js';
+import { FlightShowcaseSection } from '../../components/landing/FlightShowcaseSection.js';
 import { FeatureGrid } from '../../components/landing/FeatureGrid.js';
 import { ImpactSection } from '../../components/landing/ImpactSection.js';
 import { CleaningWorkflow } from '../../components/drone/CleaningWorkflow.js';
@@ -18,7 +19,10 @@ export const HomePage: React.FC = () => {
       {/* 1. Cinematic Hero Section with Full-Viewport 3D Drone First & Scroll-Reveal Text */}
       <HeroSection activeWorkflowStage={activeWorkflowStage} />
 
-      {/* 2. Core Features Grid (Section 23) */}
+      {/* 2. Live Autonomous Flight Demo & Annotated Hardware Architecture */}
+      <FlightShowcaseSection />
+
+      {/* 3. Core Features Grid (Section 23) */}
       <FeatureGrid />
 
       {/* 3. Project Impact & Motives (Section 24) */}

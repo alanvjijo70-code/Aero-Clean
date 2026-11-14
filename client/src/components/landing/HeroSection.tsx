@@ -6,7 +6,8 @@ import {
   ArrowRight,
   Bot,
   Sparkles,
-  ChevronDown
+  ChevronDown,
+  Play
 } from 'lucide-react';
 
 interface HeroSectionProps {
@@ -16,6 +17,13 @@ interface HeroSectionProps {
 export const HeroSection: React.FC<HeroSectionProps> = ({ activeWorkflowStage = 1 }) => {
   const scrollToDrone = () => {
     const el = document.getElementById('drone-showcase');
+    if (el) {
+      el.scrollIntoView({ behavior: 'smooth' });
+    }
+  };
+
+  const scrollToFlightDemo = () => {
+    const el = document.getElementById('flight-showcase');
     if (el) {
       el.scrollIntoView({ behavior: 'smooth' });
     }
@@ -59,7 +67,7 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ activeWorkflowStage = 
             </p>
 
             {/* CTAs */}
-            <div className="flex flex-wrap items-center gap-4 pt-2">
+            <div className="flex flex-wrap items-center gap-3.5 pt-2">
               <GradientButton
                 size="lg"
                 onClick={scrollToDrone}
@@ -67,6 +75,15 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ activeWorkflowStage = 
               >
                 Explore 3D Drone Model
               </GradientButton>
+
+              <button
+                type="button"
+                onClick={scrollToFlightDemo}
+                className="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-surface/85 hover:bg-surface-light border border-primary/40 hover:border-primary text-text-primary text-sm font-semibold transition-all shadow-sm hover:shadow-glow-cyan"
+              >
+                <Play className="w-4 h-4 text-accent fill-accent" />
+                <span>Watch Flight Demo</span>
+              </button>
 
               <Link to="/contact">
                 <GradientButton
