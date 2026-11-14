@@ -1,6 +1,7 @@
 import React, { useEffect } from 'react';
 import { BrowserRouter, Routes, Route, useLocation } from 'react-router-dom';
 import { AuthProvider } from './contexts/AuthContext.js';
+import { ThemeProvider } from './contexts/ThemeContext.js';
 import { Navbar } from './components/layout/Navbar.js';
 import { Footer } from './components/layout/Footer.js';
 import { DashboardLayout } from './components/layout/DashboardLayout.js';
@@ -8,6 +9,7 @@ import { ProtectedRoute } from './components/common/ProtectedRoute.js';
 import { ErrorBoundary } from './components/common/ErrorBoundary.js';
 import { Toaster } from 'react-hot-toast';
 import { GeminiChatWidget } from './components/chat/GeminiChatWidget.js';
+import { FloatingThemeToggle } from './components/common/FloatingThemeToggle.js';
 
 // Public Pages
 import { HomePage } from './pages/public/HomePage.js';
@@ -53,8 +55,9 @@ const PublicLayout: React.FC<{ children: React.ReactNode }> = ({ children }) => 
 export const App: React.FC = () => {
   return (
     <ErrorBoundary>
-      <AuthProvider>
-        <BrowserRouter>
+      <ThemeProvider>
+        <AuthProvider>
+          <BrowserRouter>
           <ScrollToTop />
           <Toaster
             position="top-right"
@@ -165,9 +168,13 @@ export const App: React.FC = () => {
 
           {/* Floating Google Gemini AI Assistant Widget */}
           <GeminiChatWidget />
+
+          {/* Floating Optional Theme Switcher (Dark Mode by Default) */}
+          <FloatingThemeToggle />
         </BrowserRouter>
       </AuthProvider>
-    </ErrorBoundary>
+    </ThemeProvider>
+  </ErrorBoundary>
   );
 };
 export default App;

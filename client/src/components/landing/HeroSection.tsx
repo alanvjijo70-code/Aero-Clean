@@ -1,12 +1,10 @@
 import React from 'react';
-import { Link } from 'react-router-dom';
-import { GradientButton } from '../common/GradientButton.js';
 import { InteractiveDroneCanvas } from '../drone/InteractiveDroneCanvas.js';
 import {
-  ArrowRight,
   Bot,
-  Sparkles,
   ChevronDown,
+  Layers,
+  Sparkles,
   Play
 } from 'lucide-react';
 
@@ -15,8 +13,8 @@ interface HeroSectionProps {
 }
 
 export const HeroSection: React.FC<HeroSectionProps> = ({ activeWorkflowStage = 1 }) => {
-  const scrollToDrone = () => {
-    const el = document.getElementById('drone-showcase');
+  const scrollToNarrative = () => {
+    const el = document.getElementById('scroll-narrative');
     if (el) {
       el.scrollIntoView({ behavior: 'smooth' });
     }
@@ -29,135 +27,54 @@ export const HeroSection: React.FC<HeroSectionProps> = ({ activeWorkflowStage = 
     }
   };
 
-  const scrollToContent = () => {
-    const el = document.getElementById('features');
-    if (el) {
-      el.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
-
   return (
-    <section className="relative min-h-[90vh] pt-28 pb-16 flex flex-col justify-center overflow-hidden">
-      {/* Background Glow & Spatial Grids */}
+    <section id="schematic-hero" className="relative pt-24 pb-12 sm:pb-16 flex flex-col justify-center overflow-hidden">
+      {/* Background Ambience, Glow & Spatial Grids */}
       <div className="absolute inset-0 bg-grid-pattern opacity-25 pointer-events-none" />
-      <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/10 rounded-full blur-3xl pointer-events-none" />
-      <div className="absolute bottom-1/3 right-1/4 w-96 h-96 bg-secondary/15 rounded-full blur-3xl pointer-events-none" />
+      <div className="absolute top-1/6 left-1/2 -translate-x-1/2 w-[700px] h-[400px] bg-primary/10 rounded-full blur-[140px] pointer-events-none" />
 
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full">
-        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 items-center">
-          {/* Left Hero Typography (6 cols) */}
-          <div className="lg:col-span-6 space-y-6 text-left">
-            {/* Small Badge */}
-            <div className="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-primary/10 border border-primary/30 text-primary text-xs font-semibold tracking-wider uppercase shadow-sm">
-              <Bot className="w-4 h-4 text-accent animate-pulse" />
-              <span>AUTONOMOUS CLEANING INTELLIGENCE</span>
-            </div>
-
-            {/* Large Futuristic Headline */}
-            <h1 className="text-4xl sm:text-5xl lg:text-6xl font-display font-extrabold tracking-tight text-text-primary leading-[1.1]">
-              Revolutionizing High-Rise Maintenance with{' '}
-              <span className="bg-gradient-to-r from-primary via-accent to-secondary bg-clip-text text-transparent">
-                Autonomous Drone Intelligence.
-              </span>
-            </h1>
-
-            {/* Supporting Text */}
-            <p className="text-base sm:text-lg text-text-secondary leading-relaxed max-w-xl font-normal">
-              Redefining exterior building maintenance through intelligent sensing, precision cleaning, and autonomous robotics. Engineered to eliminate extreme-height worker exposure while dramatically cutting turnaround cycles.
-            </p>
-
-            {/* CTAs */}
-            <div className="flex flex-wrap items-center gap-3.5 pt-2">
-              <GradientButton
-                size="lg"
-                onClick={scrollToDrone}
-                icon={<Sparkles className="w-4 h-4 text-background" />}
-              >
-                Explore Hardware Schematic
-              </GradientButton>
-
-              <button
-                type="button"
-                onClick={scrollToFlightDemo}
-                className="inline-flex items-center gap-2 px-5 py-3 rounded-xl bg-surface/85 hover:bg-surface-light border border-primary/40 hover:border-primary text-text-primary text-sm font-semibold transition-all shadow-sm hover:shadow-glow-cyan"
-              >
-                <Play className="w-4 h-4 text-accent fill-accent" />
-                <span>Watch Flight Demo</span>
-              </button>
-
-              <Link to="/contact">
-                <GradientButton
-                  variant="outline"
-                  size="lg"
-                  icon={<ArrowRight className="w-4 h-4" />}
-                >
-                  Request a Demo
-                </GradientButton>
-              </Link>
-            </div>
-
-            {/* Floating Statistics (Section 21.5) */}
-            <div className="pt-6 border-t border-border/80">
-              <div className="grid grid-cols-2 sm:grid-cols-4 gap-4">
-                <div>
-                  <div className="text-2xl sm:text-3xl font-display font-extrabold text-primary">
-                    100%
-                  </div>
-                  <div className="text-xs font-mono text-text-muted mt-0.5">
-                    Human-Free Objective*
-                  </div>
-                </div>
-
-                <div>
-                  <div className="text-2xl sm:text-3xl font-display font-extrabold text-accent">
-                    3x
-                  </div>
-                  <div className="text-xs font-mono text-text-muted mt-0.5">
-                    Turnaround Target*
-                  </div>
-                </div>
-
-                <div>
-                  <div className="text-2xl sm:text-3xl font-display font-extrabold text-primary">
-                    AI
-                  </div>
-                  <div className="text-xs font-mono text-text-muted mt-0.5">
-                    Multispectral Vision
-                  </div>
-                </div>
-
-                <div>
-                  <div className="text-2xl sm:text-3xl font-display font-extrabold text-accent">
-                    Smart
-                  </div>
-                  <div className="text-xs font-mono text-text-muted mt-0.5">
-                    Hybrid Cleaning Cycle
-                  </div>
-                </div>
-              </div>
-
-              <p className="text-[10px] text-text-muted font-mono mt-3">
-                *Illustrative product concept targets based on simulation models. Not verified performance guarantees.
-              </p>
-            </div>
-          </div>
-
-          {/* Right Hero 3D Drone Showcase (6 cols) */}
-          <div id="drone-showcase" className="lg:col-span-6 relative">
-            <InteractiveDroneCanvas activeStage={activeWorkflowStage} />
-          </div>
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10 w-full text-center space-y-6">
+        {/* Top Header Badge */}
+        <div className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-primary/10 border border-primary/30 text-primary text-xs font-mono font-semibold tracking-wider uppercase shadow-sm backdrop-blur-md">
+          <Bot className="w-4 h-4 text-accent animate-pulse" />
+          <span>HARDWARE AVIONICS SCHEMATIC • FIRST-LOOK SPECIFICATION</span>
+          <span className="w-2 h-2 rounded-full bg-accent animate-ping" />
         </div>
-      </div>
 
-      {/* Down Scroll Indicator */}
-      <div className="mt-8 flex justify-center">
-        <button
-          onClick={scrollToContent}
-          className="text-text-muted hover:text-primary transition-colors flex flex-col items-center gap-1 text-xs font-mono uppercase tracking-widest animate-bounce"
-        >
-          <span>Explore Platform</span>
-          <ChevronDown className="w-4 h-4" />
-        </button>
+        {/* Hero Title */}
+        <div className="space-y-2 max-w-4xl mx-auto">
+          <h1 className="text-3xl sm:text-4xl lg:text-5xl font-display font-extrabold tracking-tight text-text-primary leading-[1.15]">
+            AeroClean AI Drone{' '}
+            <span className="bg-gradient-to-r from-primary via-accent to-secondary bg-clip-text text-transparent">
+              Hardware Avionics Schematic
+            </span>
+          </h1>
+          <p className="text-sm sm:text-base text-text-secondary max-w-2xl mx-auto font-normal">
+            Official engineering blueprint and component telemetry mapping for high-rise facade cleaning robotics.
+          </p>
+        </div>
+
+        {/* 1. THE HARDWARE AVIONICS SCHEMATIC APPEARS FIRST */}
+        <div id="drone-showcase" className="w-full max-w-5xl mx-auto pt-2">
+          <InteractiveDroneCanvas
+            activeStage={activeWorkflowStage}
+            className="h-[520px] sm:h-[580px] lg:h-[620px]"
+          />
+        </div>
+
+        {/* Scroll Guidance Prompt */}
+        <div className="pt-6 flex flex-col items-center justify-center gap-3">
+          <button
+            onClick={scrollToNarrative}
+            className="group inline-flex flex-col items-center gap-1.5 text-xs font-mono tracking-widest text-text-secondary hover:text-primary transition-all uppercase py-2 px-4 rounded-full bg-surface/70 hover:bg-surface border border-border/80 hover:border-primary/50 shadow-sm"
+          >
+            <span className="flex items-center gap-2">
+              <span className="w-1.5 h-1.5 rounded-full bg-primary animate-ping" />
+              <span>Scroll Down to Generate Mission Briefing</span>
+            </span>
+            <ChevronDown className="w-4 h-4 text-accent animate-bounce group-hover:translate-y-0.5 transition-transform" />
+          </button>
+        </div>
       </div>
     </section>
   );

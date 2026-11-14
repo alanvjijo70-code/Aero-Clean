@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useAuth } from '../../contexts/AuthContext.js';
+import { useTheme } from '../../contexts/ThemeContext.js';
 import { GradientButton } from '../common/GradientButton.js';
 import { StatusIndicator } from '../common/StatusIndicator.js';
 import {
@@ -14,13 +15,16 @@ import {
   LayoutDashboard,
   LogOut,
   User,
-  ShieldCheck
+  ShieldCheck,
+  Sun,
+  Moon
 } from 'lucide-react';
 
 export const Navbar: React.FC = () => {
   const [isScrolled, setIsScrolled] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const { user, isAuthenticated, logout } = useAuth();
+  const { isDark, toggleTheme } = useTheme();
   const location = useLocation();
 
   useEffect(() => {
@@ -90,9 +94,29 @@ export const Navbar: React.FC = () => {
             })}
           </nav>
 
-          {/* Status Indicator & CTAs */}
-          <div className="hidden md:flex items-center gap-4">
+          {/* Status Indicator, Theme Switcher & CTAs */}
+          <div className="hidden md:flex items-center gap-3">
             <StatusIndicator statusText="ALL DRONES OPERATIONAL" isSimulation={true} />
+
+            {/* Optional Dark / Light Mode Switcher */}
+            <button
+              onClick={toggleTheme}
+              className="p-2 rounded-xl bg-surface/80 hover:bg-surface border border-border text-text-secondary hover:text-text-primary transition-all flex items-center gap-1.5 shadow-sm"
+              title={isDark ? "Switch to Light Mode (Optional)" : "Switch to Dark Mode (Default)"}
+              aria-label="Toggle Dark/Light Mode"
+            >
+              {isDark ? (
+                <>
+                  <Moon className="w-4 h-4 text-accent" />
+                  <span className="text-[11px] font-mono text-text-secondary hidden xl:inline">Dark</span>
+                </>
+              ) : (
+                <>
+                  <Sun className="w-4 h-4 text-warning" />
+                  <span className="text-[11px] font-mono text-text-secondary hidden xl:inline">Light</span>
+                </>
+              )}
+            </button>
 
             {isAuthenticated ? (
               <div className="flex items-center gap-2">
@@ -164,6 +188,18 @@ export const Navbar: React.FC = () => {
           </div>
 
           <div className="pt-4 border-t border-border flex flex-col gap-2.5">
+            {/* Optional Dark / Light Mode Switcher in Mobile Drawer */}
+            <button
+              onClick={toggleTheme}
+              className="w-full flex items-center justify-between px-3 py-2.5 rounded-xl bg-surface border border-border text-xs font-mono text-text-secondary"
+            >
+              <span className="flex items-center gap-2">
+                {isDark ? <Moon className="w-4 h-4 text-accent" /> : <Sun className="w-4 h-4 text-warning" />}
+                <span>Theme Mode</span>
+              </span>
+              <span className="text-primary font-bold">{isDark ? 'Dark (Default)' : 'Light (Active)'}</span>
+            </button>
+
             {isAuthenticated ? (
               <>
                 <Link to="/dashboard" className="w-full">

@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { HeroSection } from '../../components/landing/HeroSection.js';
+import { ScrollNarrativeSection } from '../../components/landing/ScrollNarrativeSection.js';
 import { FlightShowcaseSection } from '../../components/landing/FlightShowcaseSection.js';
 import { FeatureGrid } from '../../components/landing/FeatureGrid.js';
 import { ImpactSection } from '../../components/landing/ImpactSection.js';
@@ -15,14 +16,17 @@ export const HomePage: React.FC = () => {
   const [activeWorkflowStage, setActiveWorkflowStage] = useState(1);
 
   return (
-    <div className="w-full space-y-24">
-      {/* 1. Cinematic Hero Section with Full-Viewport 3D Drone First & Scroll-Reveal Text */}
+    <div className="w-full space-y-16 sm:space-y-24">
+      {/* 1. Hardware Avionics Schematic Appears First */}
       <HeroSection activeWorkflowStage={activeWorkflowStage} />
 
-      {/* 2. Live Autonomous Flight Demo & Annotated Hardware Architecture */}
+      {/* 2. Scroll-Generated Mission Briefing (Generates text while scrolling) */}
+      <ScrollNarrativeSection onScrollToTop={() => window.scrollTo({ top: 0, behavior: 'smooth' })} />
+
+      {/* 3. Live Autonomous Flight Demo & Annotated Hardware Architecture */}
       <FlightShowcaseSection />
 
-      {/* 3. Core Features Grid (Section 23) */}
+      {/* 4. Core Features Grid (Section 23) */}
       <FeatureGrid />
 
       {/* 3. Project Impact & Motives (Section 24) */}
